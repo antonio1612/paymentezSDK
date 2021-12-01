@@ -12,7 +12,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         configAuthorization.appClientKeySERVER,
       );
       final response = await http.get(
-        '${configAuthorization.getHost()}/v2/card/list?uid=$userId',
+        Uri.parse('${configAuthorization.getHost()}/v2/card/list?uid=$userId'),
         headers: {'Auth-Token': tokenAuth.toString()},
       );
       debugPrint('***PAYMENTES==> GetAllCards');
@@ -47,7 +47,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         'user': {'id': userId}
       };
       final response = await http.post(
-        '${configAuthorization.getHost()}/v2/card/delete/',
+        Uri.parse('${configAuthorization.getHost()}/v2/card/delete/'),
         headers: {'Auth-Token': tokenAuth.toString()},
         body: json.encode(dat),
       );
@@ -103,7 +103,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         }
       };
       final response = await http.post(
-        '${configAuthorization.getHost()}/v2/card/add',
+        Uri.parse('${configAuthorization.getHost()}/v2/card/add'),
         headers: {'Auth-Token': tokenAuth.toString()},
         body: json.encode(dat),
       );
@@ -136,7 +136,8 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         configAuthorization.appClientKeySERVER,
       );
       final response = await http.get(
-        '${configAuthorization.getHost()}/v2/transaction/$transactionId',
+        Uri.parse(
+            '${configAuthorization.getHost()}/v2/transaction/$transactionId'),
         headers: {'Auth-Token': tokenAuth.toString()},
       );
       debugPrint(
@@ -180,7 +181,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         'more_info': moreInfo
       };
       final response = await http.post(
-        '${configAuthorization.getHost()}/v2/transaction/verify',
+        Uri.parse('${configAuthorization.getHost()}/v2/transaction/verify'),
         headers: {'Auth-Token': tokenAuth.toString()},
         body: json.encode(dat),
       );
@@ -233,7 +234,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         },
       };
       final response = await http.post(
-        '${configAuthorization.getHost()}/v2/transaction/debit/',
+        Uri.parse('${configAuthorization.getHost()}/v2/transaction/debit/'),
         headers: {'Auth-Token': tokenAuth.toString()},
         body: json.encode(dat),
       );

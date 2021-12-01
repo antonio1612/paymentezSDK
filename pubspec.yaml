@@ -11,9 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: 0.12.2
+  http: ^0.13.1
   crypto: 2.1.5
-  dart_ipify: 1.0.2
+  dart_ipify: ^1.1.1
 
 dev_dependencies:
   flutter_test:

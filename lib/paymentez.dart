@@ -5,14 +5,15 @@ import 'dart:io';
 
 import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:paymentez/models/cardPay.dart';
 import 'package:paymentez/models/orderPay.dart';
 import 'package:paymentez/models/paymentez_resp.dart';
 import 'package:paymentez/models/userPay.dart';
 import 'package:paymentez/repository/paymentez_repository_interface.dart';
 import 'package:paymentez/utils/paymentez_security.dart';
-import 'package:http/http.dart' as http;
-import 'package:paymentez/models/cardPay.dart';
 import 'package:paymentez/utils/validator.dart';
+
 part 'services/paymentez_services.dart';
 
 class Paymentez {
