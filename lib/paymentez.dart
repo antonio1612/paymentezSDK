@@ -14,6 +14,8 @@ import 'package:paymentez/repository/paymentez_repository_interface.dart';
 import 'package:paymentez/utils/paymentez_security.dart';
 import 'package:paymentez/utils/validator.dart';
 
+export 'utils/masked_textInput_formatter.dart';
+
 part 'services/paymentez_services.dart';
 
 class Paymentez {
