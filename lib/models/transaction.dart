@@ -33,17 +33,17 @@ class Transaction {
     );
   }
 
-  final String status;
-  final String paymentDate;
-  final double amount;
-  final String authorizationCode;
-  final int installments;
-  final String devReference;
-  final int statusDetail;
-  final String carrierCode;
-  final String message;
-  final String id;
-  final String statusDetailDescription;
+  final String? status;
+  final String? paymentDate;
+  final double? amount;
+  final String? authorizationCode;
+  final int? installments;
+  final String? devReference;
+  final int? statusDetail;
+  final String? carrierCode;
+  final String? message;
+  final String? id;
+  final String? statusDetailDescription;
 
   Map<String, dynamic> toJson() => {
         'status': status,

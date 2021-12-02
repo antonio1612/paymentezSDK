@@ -44,8 +44,8 @@ class PaymentezResp {
 
   factory PaymentezResp.fromJson(dynamic dat) {
     final map = Map<String, dynamic>.from(json.decode(dat));
-    StatusResp status;
-    String message;
+    StatusResp? status;
+    String? message;
     dynamic data;
 
     if (map.containsKey('cards')) {
@@ -143,8 +143,8 @@ class PaymentezResp {
     );
   }
 
-  final StatusResp status;
-  final String message;
+  final StatusResp? status;
+  final String? message;
   final dynamic data;
 }
 

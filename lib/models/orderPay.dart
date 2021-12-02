@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
-
 class OrderPay {
   OrderPay({
-    @required this.devReference,
-    @required this.amount,
-    @required this.description,
-    @required this.vat,
+    required this.devReference,
+    required this.amount,
+    required this.description,
+    required this.vat,
     this.taxableAmount,
     this.taxPercentage = 0,
     this.installments,
@@ -31,7 +29,7 @@ class OrderPay {
   /// si es al contado(debit) colocal 0
   /// si es al corriente(credito) colocar 0 para corriente directo
   /// o numero de cuotas 3, 6, 12, 15, 18.
-  final int installments;
+  final int? installments;
 
   /// Solo disponible para Ecuador y México. Ver los valores válidos
   /// PaymentezValidate.getInstallmentsType();
@@ -46,12 +44,12 @@ class OrderPay {
   /// usa **1** para	Diferido con intereses.
   ///
   /// usa **3** para	Diferido sin intereses.
-  final int installmentsType;
+  final int? installmentsType;
 
   /// Solo disponible para Ecuador. El importe imponible es el total de todos
   /// los items imponibles o gravables **EXCLUYENDO** el *iva*. Si no se envía,
   /// se calcula sobre el total. Formato: decimal con dos dígitos de fracción.
-  final double taxableAmount;
+  final double? taxableAmount;
 
   /// Solo disponible para Ecuador. La tasa de impuesto (IVA) que se aplicará a
   /// este pedido. Debe de ser 0 o 12.

@@ -46,26 +46,28 @@ class CardPay {
       origin: dat['origin'],
       cardInfo: CardInfo.toModel(dat),
       cvc: '',
-      statusEs: dat['message'].toString() == 'WAITING_OTP' ? getStatusEs('WAITING_OTP') : getStatusEs(dat['status'].toString()),
+      statusEs: dat['message'].toString() == 'WAITING_OTP'
+          ? getStatusEs('WAITING_OTP')
+          : getStatusEs(dat['status'].toString()),
       message: dat['message'].toString(),
     );
   }
 
   CardPay copyWith({
-    String bin,
-    String status,
-    String token,
-    String holderName,
-    int expiryMonth,
-    int expiryYear,
-    String transactionReference,
-    String type,
-    String number,
-    String origin,
-    CardInfo cardInfo,
-    String cvc,
-    String statusEs,
-    String message,
+    String? bin,
+    String? status,
+    String? token,
+    String? holderName,
+    int? expiryMonth,
+    int? expiryYear,
+    String? transactionReference,
+    String? type,
+    String? number,
+    String? origin,
+    CardInfo? cardInfo,
+    String? cvc,
+    String? statusEs,
+    String? message,
   }) =>
       CardPay(
         bin: bin ?? this.bin,
@@ -85,29 +87,29 @@ class CardPay {
       );
 
   /// propertys Paymentez
-  final String bin;
-  final String status;
-  final String token;
-  final String holderName;
-  final int expiryMonth;
-  final int expiryYear;
-  final String transactionReference;
-  final String type;
-  final String number;
-  final String origin;
+  final String? bin;
+  final String? status;
+  final String? token;
+  final String? holderName;
+  final int? expiryMonth;
+  final int? expiryYear;
+  final String? transactionReference;
+  final String? type;
+  final String? number;
+  final String? origin;
 
   /// propertys View
-  final CardInfo cardInfo;
+  final CardInfo? cardInfo;
 
   /// for use model
-  final String cvc;
-  final String statusEs;
-  final String message;
+  final String? cvc;
+  final String? statusEs;
+  final String? message;
 
-  List<CardPay> getList(dynamic cards) {
-    List listCards;
-    for (final item in cards) listCards.add(CardPay.fromJson(item));
-    return listCards;
+  List<CardPay>? getList(dynamic cards) {
+    List? listCards;
+    for (final item in cards) listCards!.add(CardPay.fromJson(item));
+    return listCards as List<CardPay>?;
   }
 
   static String getStatusEs(String status) {
@@ -122,7 +124,6 @@ class CardPay {
         return 'Pendiente';
       default:
         return '$status';
-        break;
     }
   }
 
@@ -136,7 +137,7 @@ class CardPay {
         'type': type,
         'number': number,
         'origin': origin,
-        'cardInfo': cardInfo.toJson(),
+        'cardInfo': cardInfo!.toJson(),
         'cvc': cvc,
         'statusEs': statusEs,
         'message': message,
@@ -172,13 +173,13 @@ class CardInfo {
     );
   }
 
-  final String type;
-  final TypeCard typeCard;
-  final String fullName;
-  final String spacingPatterns;
-  final int cvvLength;
-  final int colorHex;
-  final String numCardFormated;
+  final String? type;
+  final TypeCard? typeCard;
+  final String? fullName;
+  final String? spacingPatterns;
+  final int? cvvLength;
+  final int? colorHex;
+  final String? numCardFormated;
 
   Map<String, dynamic> toJson() => {
         'type': type,

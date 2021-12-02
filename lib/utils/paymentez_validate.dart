@@ -45,7 +45,7 @@ class PaymentezValidate {
   /// para obtener informacion respecto a la tarjeta se debe colocar los
   /// 6 primeros digitos de la tarjeta caso contrario retorna null
   static CardInfo getCarInfo(String numCardLenth6) {
-    CardInfo cardInfo;
+    CardInfo? cardInfo;
     var name = _noSupport;
     if (numCardLenth6.length < 6) {
       throw Exception('''

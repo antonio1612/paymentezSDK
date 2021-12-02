@@ -13,7 +13,7 @@ class UserPay {
   /// entidad relación (Base de datos).
   /// nosotros recomendamos usar como identificador un token de
   /// 15 a 20 caracteres alfanuméricos.
-  final String id;
+  final String? id;
 
   /// ### ===============ES===============
   /// **[email]** Correo electrónico del comprador, con formato de correo
@@ -27,11 +27,11 @@ class UserPay {
   /// NOTA: la responsabilidad de esta validación es responsabilidad suya
   /// dado que este correo tiene que ser validado dentro del registro del
   /// usuario u otro método del mismo.
-  final String email;
+  final String? email;
 
   /// ### ===============ES===============
   /// **[phone]** Teléfono del comprador. dado que este módulo fue hecho con el
   /// objetivo de dar soporte para Paymentez Ecuador en lo posible queda en
   /// responsabilidad suya dar un formato correcto ejemplo +593xxxxxxxxx
-  final String phone;
+  final String? phone;
 }

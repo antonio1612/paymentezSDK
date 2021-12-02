@@ -21,9 +21,9 @@ part 'services/paymentez_services.dart';
 class Paymentez {
   Paymentez._();
   static final _instance = Paymentez._();
-  static PaymentezRepositoryInterface _paymentezRepositoryInterface;
+  static late PaymentezRepositoryInterface _paymentezRepositoryInterface;
 
-  static Paymentez instance({ConfigAuthorization configAuthorization}) {
+  static Paymentez instance({ConfigAuthorization? configAuthorization}) {
     _paymentezRepositoryInterface = _PaymentezServices(configAuthorization);
     return _instance;
   }
@@ -51,9 +51,9 @@ class Paymentez {
   /// ```
   ///
   Future<PaymentezResp> addCard({
-    @required String sessionId,
-    @required UserPay user,
-    @required CardPay card,
+    required String sessionId,
+    required UserPay user,
+    required CardPay card,
   }) async {
     return await _paymentezRepositoryInterface.addCard(
       user: user,
@@ -82,11 +82,11 @@ class Paymentez {
   }
 
   Future<PaymentezResp> verify({
-    @required String userId,
-    @required String transactionId,
-    @required String type,
-    @required String value,
-    @required bool moreInfo,
+    required String userId,
+    required String transactionId,
+    required String type,
+    required String value,
+    required bool moreInfo,
   }) async {
     return await _paymentezRepositoryInterface.verify(
       userId: userId,
@@ -154,9 +154,9 @@ class Paymentez {
   /// );
   /// ```
   Future<PaymentezResp> debitToken({
-    @required UserPay user,
-    @required CardPay card,
-    @required OrderPay orderPay,
+    required UserPay user,
+    required CardPay card,
+    required OrderPay orderPay,
   }) async {
     return await _paymentezRepositoryInterface.debitToken(
       user: user,
@@ -169,10 +169,10 @@ class Paymentez {
 class ConfigAuthorization {
   ConfigAuthorization({
     this.production = false,
-    @required this.appCode,
-    @required this.appClientKey,
-    @required this.appCodeSERVER,
-    @required this.appClientKeySERVER,
+    required this.appCode,
+    required this.appClientKey,
+    required this.appCodeSERVER,
+    required this.appClientKeySERVER,
     this.isLogServe = false,
     this.enableTracking = false,
     this.urlLogServe,
@@ -186,8 +186,8 @@ class ConfigAuthorization {
   final String appClientKeySERVER;
   final bool isLogServe;
   final bool enableTracking;
-  final String urlLogServe;
-  final Map<String, String> headers;
+  final String? urlLogServe;
+  final Map<String, String>? headers;
 
   String getHost() {
     return production
