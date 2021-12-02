@@ -14,7 +14,17 @@ import 'package:paymentez/repository/paymentez_repository_interface.dart';
 import 'package:paymentez/utils/paymentez_security.dart';
 import 'package:paymentez/utils/validator.dart';
 
+//Exports models
+export 'models/cardPay.dart';
+export 'models/orderPay.dart';
+export 'models/paymentez_resp.dart';
+export 'models/transaction.dart';
+export 'models/userPay.dart';
+//Exports utils
 export 'utils/masked_textInput_formatter.dart';
+export 'utils/paymentez_security.dart';
+export 'utils/paymentez_validate.dart';
+export 'utils/validator.dart';
 
 part 'services/paymentez_services.dart';
 
