@@ -154,13 +154,13 @@ class _StatusRespPaymentez {
   static int getStatusRespPaymentez(dynamic error) {
     final type = error['type'].toString().split(':')[0].toString();
     final description = error['description'].toString();
-
+    print(description);
     if (type == 'Card already added') {
       return _StatusRespPaymentez.cardAlreadyAdded;
     }
 
     if (type == 'OperationNotAllowedError' &&
-        description == 'Invalid date of validity') {
+        description.contains('Invalid date of validity')) {
       return _StatusRespPaymentez.invalidDateOfValidity;
     }
 
