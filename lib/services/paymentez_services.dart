@@ -210,6 +210,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
     UserPay? user,
     CardPay? card,
     OrderPay? orderPay,
+    required String cvc,
   }) async {
     try {
       final tokenAuth = PaymentezSecurity.getAuthToken(
@@ -217,7 +218,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         configAuthorization!.appClientKeySERVER,
       );
       final dat = {
-        'card': {'token': card!.token},
+        'card': {'token': card!.token, 'cvc': cvc},
         'user': {'id': user!.id, 'email': user.email},
         'order': {
           'amount': orderPay!.amount,

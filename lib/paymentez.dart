@@ -167,11 +167,13 @@ class Paymentez {
     required UserPay user,
     required CardPay card,
     required OrderPay orderPay,
+    required String cvc,
   }) async {
     return await _paymentezRepositoryInterface.debitToken(
       user: user,
       card: card,
       orderPay: orderPay,
+      cvc: cvc,
     );
   }
 }
