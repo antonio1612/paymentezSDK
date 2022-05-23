@@ -14,7 +14,7 @@ class PaymentezSecurity {
     /// tendrá 15 segundos antes de que necesite crear una nueva ,o su
     /// solicitud será rechazada (error.type: Invalid timestamp).
     final authTimeStamp =
-        (DateTime.now().millisecondsSinceEpoch / 1000).toString();
+        (DateTime.now().millisecondsSinceEpoch / 1000).truncate().toString();
     debugPrint(DateTime.now().millisecondsSinceEpoch.toString());
     debugPrint(authTimeStamp);
 
