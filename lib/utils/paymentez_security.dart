@@ -12,7 +12,8 @@ class PaymentezSecurity {
     /// que la solicitud,tenga en cuenta que la hora está en UTC y en SEGUNDOS,
     /// tendrá 15 segundos antes de que necesite crear una nueva ,o su
     /// solicitud será rechazada (error.type: Invalid timestamp).
-    final authTimeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final authTimeStamp =
+        (DateTime.now().millisecondsSinceEpoch / 1000).toString();
 
     /// Genera el UNIQ-TOKEN: Es la representación hexadecimal de un hash que
     /// sha256 genera a partir de la cadena 'clave-secreta' + 'marca de tiempo',
