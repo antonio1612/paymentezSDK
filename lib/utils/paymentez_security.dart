@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/rendering.dart';
 
 class PaymentezSecurity {
   /// ============ALGORITMO DE PAYMENTEZ==============
@@ -14,6 +15,8 @@ class PaymentezSecurity {
     /// solicitud será rechazada (error.type: Invalid timestamp).
     final authTimeStamp =
         (DateTime.now().millisecondsSinceEpoch / 1000).toString();
+    debugPrint(DateTime.now().millisecondsSinceEpoch.toString());
+    debugPrint(authTimeStamp);
 
     /// Genera el UNIQ-TOKEN: Es la representación hexadecimal de un hash que
     /// sha256 genera a partir de la cadena 'clave-secreta' + 'marca de tiempo',
