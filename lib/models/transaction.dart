@@ -15,18 +15,18 @@ class Transaction {
     this.statusDetailDescription,
   });
 
-  factory Transaction.fromJson(dynamic dat) {
+  factory Transaction.fromJson(Map<String, dynamic> dat) {
     return Transaction(
-      status: dat['status'],
-      paymentDate: dat['payment_date'],
+      status: dat['status'] as String?,
+      paymentDate: dat['payment_date'] as String?,
       amount: double.parse(dat['amount'].toString()),
-      authorizationCode: dat['authorization_code'],
+      authorizationCode: dat['authorization_code'] as String?,
       installments: int.parse(dat['installments'].toString()),
-      devReference: dat['dev_reference'],
+      devReference: dat['dev_reference'] as String?,
       statusDetail: int.parse(dat['status_detail'].toString()),
-      carrierCode: dat['carrier_code'],
-      message: dat['message'],
-      id: dat['id'],
+      carrierCode: dat['carrier_code'] as String?,
+      message: dat['message'] as String?,
+      id: dat['id'] as String?,
       statusDetailDescription: PaymentezValidate.geStatusDetailDescription(
         int.parse(dat['status_detail'].toString()),
       ),

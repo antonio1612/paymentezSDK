@@ -32,18 +32,18 @@ class CardPay {
     this.message,
   });
 
-  factory CardPay.fromJson(dynamic dat) {
+  factory CardPay.fromJson(Map<String, dynamic> dat) {
     return CardPay(
-      bin: dat['bin'],
-      status: dat['status'],
-      token: dat['token'],
-      holderName: dat['holder_name'],
+      bin: dat['bin'] as String?,
+      status: dat['status'] as String?,
+      token: dat['token'] as String?,
+      holderName: dat['holder_name'] as String?,
       expiryMonth: int.parse(dat['expiry_month'].toString()),
       expiryYear: int.parse(dat['expiry_year'].toString()),
-      transactionReference: dat['transaction_reference'],
-      type: dat['type'],
+      transactionReference: dat['transaction_reference'] as String?,
+      type: dat['type'] as String?,
       number: dat['number'].toString(),
-      origin: dat['origin'],
+      origin: dat['origin'] as String?,
       cardInfo: CardInfo.toModel(dat),
       cvc: '',
       statusEs: dat['message'].toString() == 'WAITING_OTP'
@@ -106,9 +106,11 @@ class CardPay {
   final String? statusEs;
   final String? message;
 
-  List<CardPay>? getList(dynamic cards) {
+  List<CardPay>? getList(List<Map<String, dynamic>> cards) {
     List? listCards;
-    for (final item in cards) listCards!.add(CardPay.fromJson(item));
+    for (final item in cards) {
+      listCards!.add(CardPay.fromJson(item));
+    }
     return listCards as List<CardPay>?;
   }
 
@@ -123,7 +125,7 @@ class CardPay {
       case 'pending':
         return 'Pendiente';
       default:
-        return '$status';
+        return status;
     }
   }
 

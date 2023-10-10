@@ -330,7 +330,7 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
     try {
       var ipv4 = '-';
       var ipv6 = '-';
-      if (params['enableTracking']) {
+      if (params['enableTracking'] as bool) {
         ipv4 = await Ipify.ipv4(format: Format.JSON);
         ipv6 = await Ipify.ipv64(format: Format.JSON);
       }
@@ -351,8 +351,8 @@ class _PaymentezServices extends PaymentezRepositoryInterface {
         }
       };
       final response = await http.post(
-        params['urlLogServe'],
-        headers: params['headers'],
+        Uri.dataFromString(params['urlLogServe'].toString()),
+        headers: params['headers'] as Map<String, String>?,
         body: json.encode(dat),
       );
       debugPrint(response.statusCode.toString());

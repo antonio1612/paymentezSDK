@@ -42,14 +42,14 @@ enum StatusResp {
 class PaymentezResp {
   PaymentezResp({this.status, this.message, this.data});
 
-  factory PaymentezResp.fromJson(dynamic dat) {
-    final map = Map<String, dynamic>.from(json.decode(dat));
+  factory PaymentezResp.fromJson(String dat) {
+    final map = Map<String, dynamic>.from(json.decode(dat) as Map);
     StatusResp? status;
     String? message;
     dynamic data;
 
     if (map.containsKey('cards')) {
-      final lista = List.from(map['cards']);
+      final lista = map['cards'] as List<Map<String, dynamic>>;
       if (lista.isEmpty) {
         status = StatusResp.notFound;
         message = 'No tienen ninguna tarjeta registrada';
@@ -57,7 +57,7 @@ class PaymentezResp {
       } else {
         status = StatusResp.success;
         message = 'Datos encontrados';
-        data = lista.map((element) => CardPay.fromJson(element)).toList();
+        data = lista.map(CardPay.fromJson).toList();
       }
     }
 
@@ -70,65 +70,62 @@ class PaymentezResp {
     if (map.containsKey('card')) {
       status = StatusResp.success;
       message = map['card']['message'].toString();
-      data = CardPay.fromJson(map['card']);
+      data = CardPay.fromJson(map['card'] as Map<String, dynamic>);
     }
 
     if (map.containsKey('transaction') && map.containsKey('card')) {
-      final transaction = Transaction.fromJson(map['transaction']);
+      final transaction =
+          Transaction.fromJson(map['transaction'] as Map<String, dynamic>);
       status = StatusResp.success;
       message = transaction.statusDetailDescription;
-      data = [CardPay.fromJson(map['card']), transaction];
+      data = [
+        CardPay.fromJson(map['card'] as Map<String, dynamic>),
+        transaction,
+      ];
     }
 
     if (map.containsKey('error')) {
-      final srPay = _StatusRespPaymentez.getStatusRespPaymentez(map['error']);
+      final srPay = _StatusRespPaymentez.getStatusRespPaymentez(
+        map['error'] as Map<String, dynamic>,
+      );
       switch (srPay) {
         case _StatusRespPaymentez.cardAlreadyAdded:
           status = StatusResp.conflict;
           message = 'Si desea actualizar la tarjeta, primero elimínela.';
           data = null;
-          break;
         case _StatusRespPaymentez.invalidDateOfValidity:
           status = StatusResp.conflict;
           message = 'Fecha de validez no válida.';
           data = null;
-          break;
         case _StatusRespPaymentez.cardInvalidNumber:
           status = StatusResp.conflict;
           message = 'Escribe un número válido de tarjeta.';
           data = null;
-          break;
         case _StatusRespPaymentez.badRequest:
           status = StatusResp.conflict;
           message = 'El tipo de tarjeta no es correcto o no es soportada';
           data = null;
-          break;
         case _StatusRespPaymentez.validationError:
           status = StatusResp.conflict;
           message = 'Escribe un número válido de tarjeta.';
           data = null;
-          break;
         case _StatusRespPaymentez.invalidToken:
           status = StatusResp.conflict;
           message = 'Token Invalido';
           data = null;
-          break;
         case _StatusRespPaymentez.transactionExceededApp:
           status = StatusResp.conflict;
           message =
               '''Se superó el número de transacciones mostradas para esta aplicación''';
           data = null;
-          break;
         case _StatusRespPaymentez.verificationError:
           status = StatusResp.conflict;
           message = 'Error en la verificación';
           data = null;
-          break;
         case _StatusRespPaymentez.stranger:
           status = StatusResp.conflict;
           message = 'Verifica el número de la tajeta';
           data = null;
-          break;
         default:
           status = StatusResp.conflict;
           message = 'Vuelve a intentarlo';
@@ -151,8 +148,8 @@ class PaymentezResp {
 class _StatusRespPaymentez {
   _StatusRespPaymentez._();
 
-  static int getStatusRespPaymentez(dynamic error) {
-    final type = error['type'].toString().split(':')[0].toString();
+  static int getStatusRespPaymentez(Map<String, dynamic> error) {
+    final type = error['type'].toString().split(':')[0];
     final description = error['description'].toString();
     print(description);
     if (type == 'Card already added') {
@@ -184,7 +181,9 @@ class _StatusRespPaymentez {
       return _StatusRespPaymentez.transactionExceededApp;
     } else {
       final newType = error['type'].toString();
-      final jsonData = Map.from(json.decode(newType.replaceAll("'", '"')));
+      final jsonData = Map<dynamic, dynamic>.from(
+        json.decode(newType.replaceAll("'", '"')) as Map,
+      );
       if (jsonData.containsKey('code') && jsonData.containsKey('description')) {
         if (jsonData['code'].toString() == '7' &&
             jsonData['description'].toString() == 'VerificationError') {
